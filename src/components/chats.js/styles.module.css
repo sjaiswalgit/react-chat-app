@@ -1,0 +1,30 @@
+.userChat{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap:10px;
+    color: white;
+    cursor: pointer;
+    &:hover{
+        background-color: #2f2d52;
+    }
+}
+.userImage{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.userChatInfo{
+    display: flex;
+    flex-direction: column;
+}
+.username{
+    font-size: 14px;
+    font-weight: normal;
+}
+.lastmssg{
+    font-size: 14px;
+    color: lightgray;
+    margin: 0;
+}
