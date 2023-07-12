@@ -4,11 +4,16 @@ import Addimage from '../../Images/addImage.png'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import {auth,storage,db} from '../../Firebase/firebase'
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
-import { collection, doc, setDoc } from "firebase/firestore";
-const Register = () => {
-const [err,setErr]=useState(false)
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate, Link } from "react-router-dom";
 
-const handleSubmit = async (e) => {
+const Register = () => {
+  const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const displayName = e.target[0].value;
     const email = e.target[1].value;
@@ -18,8 +23,10 @@ const handleSubmit = async (e) => {
     try {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
-        const storageRef=ref(storage,displayName)
+
       //Create a unique image name
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`);
 
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
@@ -38,19 +45,20 @@ const handleSubmit = async (e) => {
             });
 
             //create empty user chats on firestore
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+            navigate("/");
           } catch (err) {
             console.log(err);
             setErr(true);
-           
+            setLoading(false);
           }
         });
       });
     } catch (err) {
       setErr(true);
-      
+      setLoading(false);
     }
   };
-
 
   return (
     <div className={styles.formContainer}>
@@ -66,10 +74,11 @@ const handleSubmit = async (e) => {
                     <img src={Addimage} alt="Nan" width="50px"/>
                     <span>Add an avatar</span>
                 </label>
-                <button className={styles.inputbtn}>Sign Up</button>
+                <button disabled={loading} className={styles.inputbtn}>Sign Up</button>
+                {loading && "Uploading and compressing the image please wait..."}
                 {err&&<span>Something went wrong</span>}
             </form>
-            <p> You do have a account ? <span style={{fontWeight:"bold",cursor:"pointer"}}>Login</span></p>
+            <p> You do have a account ? <Link to="/login" style={{fontWeight:"bold",cursor:"pointer"}}>Login</Link></p>
         </div>
     </div>
   )
