@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from './styles.module.css'
-import attact from '../../Images/attach.png'
 import send from '../../Images/send.png'
 import add from '../../Images/addImage.png'
 import { AuthContext } from "../../context/AuthContext";
