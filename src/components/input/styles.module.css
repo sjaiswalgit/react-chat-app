@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 .typemssg{
     width: 100%;
@@ -22,15 +23,32 @@
     align-items: center;
     gap: 10px;
     justify-content: center;
+    z-index: 0;
 }
 .sentImg{
-    height: 24px;
+    height: 30px;
     cursor: pointer;
     object-fit: cover;
 }
+.sentImg:hover{
+    scale:1.1;
+}
 .sendbtn{
     border: none;
-    padding: 10px 15px;
-    color:white;
-    background-color: #8da4f1;
+  padding: 0;
+  cursor: pointer;
+  background-color: white;
+}
+.sendbtn:hover{
+    scale:1.1;
+  }
+.sendpic{
+position: absolute;
+z-index:2;
+height: 100px;
+top:-100px;
+left:0px
+}
+.nopic{
+    display: none;
 }

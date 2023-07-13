@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles.module.css'
 import { useContext, useState } from "react";
 import {
   collection,
-  query,
-  where,
   getDocs,
   setDoc,
   doc,
@@ -15,7 +13,7 @@ import {
 import { db } from "../../Firebase/firebase";
 import { AuthContext } from "../../context/AuthContext";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
@@ -23,32 +21,32 @@ const SearchBar = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleSearch = async () => {
-    const q = query(
-      collection(db, "users"),
-      where("displayName", "==", username)
-    );
-
     try {
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const userdata=[]
       querySnapshot.forEach((doc) => {
-        setUser(doc.data());
+        const word= new RegExp(username,"i")
+        const find= doc.data().displayName.search(word)
+        if(find!==-1)
+        {userdata.push(doc.data())}
       });
+     
+      setUser(userdata)
+
     } catch (err) {
+      console.log(err)
       setErr(true);
     }
-  };
+  }
 
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
 
-  const handleSelect = async () => {
+  const handleSelect = async (e) => {
     console.log("selected")
     //check whether the group(chats in firestore) exists, if not create
     const combinedId =
-      currentUser.uid > user.uid
-        ? currentUser.uid + user.uid
-        : user.uid + currentUser.uid;
+      currentUser.uid > e.uid
+        ? currentUser.uid + e.uid
+        : e.uid + currentUser.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
 
@@ -56,26 +54,26 @@ const SearchBar = () => {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
         const tes = await getDoc(doc(db, "userChats", currentUser.uid));
-        const nes = await getDoc(doc(db, "userChats", user.uid));
+        const nes = await getDoc(doc(db, "userChats", e.uid));
         if (!tes.exists()) {
           //create a chat in chats collection
           await setDoc(doc(db, "userChats", currentUser.uid), { });}
           
         if (!nes.exists()) {
           //create a chat in chats collection
-          await setDoc(doc(db, "userChats", user.uid), { });}
+          await setDoc(doc(db, "userChats", e.uid), { });}
 
         //create user chats
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
+            uid: e.uid,
+            displayName: e.displayName,
+            photoURL: e.photoURL,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
 
-        await updateDoc(doc(db, "userChats", user.uid), {
+        await updateDoc(doc(db, "userChats", e.uid), {
          [ combinedId + ".userInfo"]: {
             uid: currentUser.uid,
             displayName: currentUser.displayName,
@@ -89,23 +87,38 @@ const SearchBar = () => {
     setUser(null);
     setUsername("")
   };
+function setSearchDefault(){
+  setUser(null);
+  setUsername("")
+}
+useEffect(()=>{
+  console.log(props.searchDef)
+    setSearchDefault()
+    props.setsearchDef(false)
+    
+}, [props.searchDef])
+
+
  
   return (
     <div className={styles.search}>
       <div className={styles.searchForm} >
-        <input type="text" className={styles.searchInp} placeholder='Find a user' onKeyDown={handleKey}
-          onChange={(e) => setUsername(e.target.value)}
+        <input type="text" className={styles.searchInp} placeholder='Find a user' 
+          onChange={(e) => {setUsername(e.target.value); handleSearch(); console.log(e.target.value)}}
           value={username}/>
       </div>
+      
       {err && <span>User not found!</span>}
       {user && (
-      <div className={styles.userChat} onClick={handleSelect}>
-        <img className={styles.userImage} src={user.photoURL} alt="Nan" />
+        user.map((e)=>{return(
+      <div className={styles.userChat} onClick={()=>handleSelect(e)}>
+        <img className={styles.userImage} src={e.photoURL} alt="Nan" />
         <div  className={styles.userChatInfo}>
-          <span>{user.displayName}</span>
+          <span>{e.displayName}</span>
         </div>
       </div>
-       )}
+      )}) )}
+     
       </div>
   )
 }

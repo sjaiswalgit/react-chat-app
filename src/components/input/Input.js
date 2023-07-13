@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from './styles.module.css'
 import attact from '../../Images/attach.png'
+import send from '../../Images/send.png'
 import add from '../../Images/addImage.png'
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
@@ -18,22 +19,24 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 const Input = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
-
+  const [imageURL,setImageURL]=useState(null)
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+
+
+useEffect(()=>{
+  if(img){const imgURL=URL.createObjectURL(img)
+  setImageURL(imgURL)}
+},[img])
+
 
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
-
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+      await uploadBytesResumable(storageRef, img).then(() => {
+          getDownloadURL(storageRef).then(async (downloadURL) => {
+            try{
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -42,11 +45,16 @@ const Input = () => {
                 date: Timestamp.now(),
                 img: downloadURL,
               }),
-            });
+            });}
+            catch(err){console.log(err)}
           });
+          
         }
       );
-    } else {
+    
+    } 
+    
+    else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -56,6 +64,7 @@ const Input = () => {
         }),
       });
     }
+    setText("");
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
@@ -71,20 +80,24 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
-    setText("");
+   
     setImg(null);
   };
+  console.log(img)
   return (
     <div className={styles.input}>
         <input type='text' placeholder='Type something...' className={styles.typemssg} onChange={(e) => setText(e.target.value)}
         value={text}/>
         <div className={styles.sent}>
-            <img src={attact} alt='' className={styles.sentImg}/>
-            <input type='file' style={{display:'none'}} id='file' onChange={(e) => setImg(e.target.files[0])}/>
+            <input type='file' accept="image/*" style={{display:'none'}} id='file' onChange={(e) => setImg(e.target.files[0])}/>
             <label htmlFor='file'>
                 <img src={add} alt="" className={styles.sentImg}/>
             </label>
-            <button className={styles.sendbtn} onClick={handleSend}>send</button>
+            <button className={styles.sendbtn} onClick={handleSend}><img style={{width:'30px',objectFit:"cover"}} src={send} alt="" /></button>
+          <figure className={(img?styles.sendpic:styles.nopic)}>
+          <img src={imageURL} height="100px" />
+          <figcaption style={{textAlign:"center"}}>Preview</figcaption>
+          </figure>
         </div>
     </div>
   )

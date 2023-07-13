@@ -9,12 +9,36 @@
     justify-content: space-between;
     padding: 10px;
     color: lightgray;
+    text-transform: capitalize;
+    font-weight: bold;
 }
 .chatIcon{
     display: flex;
     gap:10px;
+    position: relative;
+
+
 }
+.chatIcon:hover .clearchat{display: block;}
 .chatIconimg{
     height: 24px;
         cursor: pointer;
+}
+.userimg{
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 30px;
+}
+.clearchat{
+    position:absolute;
+    right: 10px;
+    top:10px;
+    padding: 10px;
+    background-color:#3e3c61 ;
+    color:white;
+    width:100px;
+    font-weight: normal;
+    cursor: pointer;
+    display: none;
 }
