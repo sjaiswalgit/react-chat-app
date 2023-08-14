@@ -18,7 +18,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/React-Chat-App">
       <Routes>
         <Route path="/">
           <Route

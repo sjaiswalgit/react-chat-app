@@ -21,16 +21,16 @@ const Login = () => {
   };
   return (
     <div className={styles.formContainer}>
-    <div className={styles.formWrapper}>
+    <div className={styles.formWrapper} style={{backgroundImage:`url("${process.env.PUBLIC_URL +'loginbg.png'}")`}}>
         <span className={styles.logo}>Chat App</span>
-        <span className={styles.title}>Register</span>
-        <form onSubmit={handleSubmit}>
+        <span className={styles.title}>Login</span>
+        <form onSubmit={handleSubmit} className={styles.form}>
             <input type="email" className={styles.input2} placeholder='email' />
             <input type="password" className={styles.input3} placeholder='password' />
             <button className={styles.inputbtn}>Sign In</button>
             {err && <span>Something went wrong</span>}
         </form>
-        <p> You don't have a account ? <Link to='/register' style={{fontWeight:"bold",cursor:"pointer"}}>SignUp</Link></p>
+        <p> You don't have a account ? <Link to='/register' style={{fontWeight:"bold",cursor:"pointer",color:"rgb(230, 67, 94)"}}>SignUp</Link></p>
     </div>
 </div>
   )

@@ -14,6 +14,7 @@ import {
 import { db, storage } from "../../Firebase/firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -85,7 +86,7 @@ useEffect(()=>{
   console.log(img)
   return (
     <div className={styles.input}>
-        <input type='text' placeholder='Type something...' className={styles.typemssg} onChange={(e) => setText(e.target.value)}
+        <input type='text' placeholder='Type something...' className={styles.typemssg} onChange={(e) => setText(e.target.value)} disabled={(data.chatId==="null")}
         value={text}/>
         <div className={styles.sent}>
             <input type='file' accept="image/*" style={{display:'none'}} id='file' onChange={(e) => setImg(e.target.files[0])}/>

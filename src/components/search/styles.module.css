@@ -6,6 +6,7 @@
 }
 .searchInp{
     background-color: transparent;
+    width: 100%;
     border: none;
     color: white;
     outline:none;
