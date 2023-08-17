@@ -23,7 +23,7 @@ const Messages = () => {
   }, [data.chatId]);
   return (
     <div className={(userConnected!=="null")?styles.messages:styles.nomessages}>
-       {(userConnected==="null")?<div style={{fontWeight:"bold"}}>Select a User from Sidebar to Start Conversation</div>:
+       {(userConnected==="null")?<div style={{fontSize:"1.5em",fontWeight:"bold"}}>Select a User from Sidebar to Start Conversation</div>:
        (messages.length===0)?<>Type a message</>:
        messages.map((m) => (
         <Message message={m} key={m.id} />

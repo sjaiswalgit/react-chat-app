@@ -21,7 +21,7 @@ const Login = () => {
   };
   return (
     <div className={styles.formContainer}>
-    <div className={styles.formWrapper} style={{backgroundImage:`url("${process.env.PUBLIC_URL +'loginbg.png'}")`}}>
+    <div className={styles.formWrapper} style={{backgroundImage:`url("${process.env.PUBLIC_URL +'/loginbg.png'}")`}}>
         <span className={styles.logo}>Chat App</span>
         <span className={styles.title}>Login</span>
         <form onSubmit={handleSubmit} className={styles.form}>

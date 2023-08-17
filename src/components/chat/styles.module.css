@@ -3,7 +3,7 @@
 }
 .chatInfo{
     height: 50px;
-    background-color: #5d5b8d;
+    background-color: rgba(0,0,0,0.5);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,8 +16,6 @@
     display: flex;
     gap:10px;
     position: relative;
-
-
 }
 .chatIcon:hover .clearchat{display: block;}
 .chatIconimg{
@@ -41,4 +39,19 @@
     font-weight: normal;
     cursor: pointer;
     display: none;
+}
+.arroy{
+    font-size: xx-large;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+}
+.arroy img{
+    margin-top: 5px;
+}
+.arroy:hover{
+    color:grey;
 }

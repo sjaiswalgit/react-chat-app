@@ -6,19 +6,21 @@ import Input from '../input/Input'
 import { setDoc,doc } from "firebase/firestore";
 import { db } from "../../Firebase/firebase";
 import { ChatContext } from "../../context/ChatContext";
+import { ToggleContext } from "../../context/ToggleContext";
 const Chat = () => {
   const { data } = useContext(ChatContext);
-
+  const {data1,dispatch1}=useContext(ToggleContext)
   const clearChat= async()=>{
-
   await setDoc(doc(db, "chats", data.chatId), {
     messages:[]
   });}
-
+  const moveSlide=()=>{
+    dispatch1({type:"Nav_Toggle",payload:true})
+  }
   return (
     <div className={styles.chat}>
         <div className={styles.chatInfo}>
-        <img className={styles.userimg} src={data.user?.photoURL} alt="" />
+       <div className={styles.arroy} onClick={moveSlide}> {Object.keys(data.user).length!==0?<img className={styles.userimg} src={data.user?.photoURL} alt="" />:<></> }<span> &#8594;</span></div>
         <span>{data.user?.displayName}</span>
         <div className={styles.chatIcon}>
             <img className={styles.chatIconimg} src={more} alt=''  />

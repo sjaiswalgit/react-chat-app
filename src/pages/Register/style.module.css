@@ -76,3 +76,33 @@ input::placeholder{
     width:20cqmax;
     cursor: pointer;
 }
+@media only screen and (max-width:600px)
+{
+    .formWrapper{
+width: fit-content;
+padding: 0;
+border: none;
+background-position: 2rem 5rem;
+    }
+    .form{
+        padding: 5px 5px 10px 5px;
+    }
+    .input1,.input2,.input3 {
+        padding: 15px;
+        border:none;
+        outline: none;
+        background-color: transparent;
+        border-bottom:1px solid #a7bcff;
+        width: 14rem;
+        font-size: 300;
+        color:white;
+        }
+        .labal{
+            color:white;
+            display: flex;
+            align-items: center;
+            width:25cqmax;
+            cursor: pointer;
+        }
+    
+}

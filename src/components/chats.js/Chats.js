@@ -4,10 +4,11 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
+import { ToggleContext } from '../../context/ToggleContext';
 import { db } from "../../Firebase/firebase";
 const Chats = () => {
   const [chats, setChats] = useState([]);
-
+  const {dispatch1}=useContext(ToggleContext)
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
 
@@ -32,10 +33,10 @@ const Chats = () => {
   };
 
   return (
-    <div className={styles.chats}>
+    <div className={styles.chats} >
        {(chats)?Object.entries(chats).sort((a,b)=>b[1].date - a[1].date).map((chat) => (
         <div className={styles.userChat} key={chat[0]}
-        onClick={() => handleSelect(chat[1].userInfo)}>
+        onClick={() =>{ handleSelect(chat[1].userInfo); dispatch1({type:"Nav_Toggle",payload:false})}} >
         <img className={styles.userImage} src={chat[1].userInfo.photoURL} alt="Nan" />
         {console.log(chat[1].userInfo.photoURL)}
         <div  className={styles.userChatInfo}>

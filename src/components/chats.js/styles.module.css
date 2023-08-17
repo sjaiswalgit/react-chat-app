@@ -5,9 +5,9 @@
     gap:10px;
     color: white;
     cursor: pointer;
-    &:hover{
-        background-color: #2f2d52;
-    }
+}
+.userChat:hover{
+    background-color: rgb(160, 52, 84);
 }
 .userImage{
     width: 50px;
@@ -20,12 +20,13 @@
     flex-direction: column;
 }
 .username{
-    font-size: 14px;
-    font-weight: normal;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
     
 }
 .lastmssg{
-    font-size: 14px;
-    color: lightgray;
+    font-size: 0.8rem;
+    color: rgb(240, 236, 236);
     margin: 0;
 }

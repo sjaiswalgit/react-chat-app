@@ -66,7 +66,7 @@ const Register = () => {
   
   return (
     <div className={styles.formContainer}>
-        <div className={styles.formWrapper} style={{backgroundImage:`url("${process.env.PUBLIC_URL +'loginbg.png'}")`}}>
+        <div className={styles.formWrapper} style={{backgroundImage:`url("${process.env.PUBLIC_URL +'/loginbg.png'}")`}}>
             <span className={styles.logo}>Chat App</span>
             <span className={styles.title}>Register</span>
             <form onSubmit={(e)=>handleSubmit(e)} className={styles.form}>

@@ -1,20 +1,20 @@
 .search{
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid gray;
 }
-.searchForm{
 
-}
 .searchInp{
     background-color: transparent;
     width: 100%;
+    font-size:0.9rem;
+    height: 2rem;
     border: none;
     color: white;
     outline:none;
-    &::placeholder{
-        color: lightgray;
-    }
+    
 }
-
+.searchInp::placeholder{
+    color: lightgray;
+}
 .userChat{
     display: flex;
     padding: 10px;
@@ -22,9 +22,10 @@
     gap:10px;
     color: white;
     cursor: pointer;
-    &:hover{
-        background-color: #2f2d52;
-    }
+    
+}
+.userChat:hover{
+    background-color: #2f2d52;
 }
 .userImage{
     width: 50px;

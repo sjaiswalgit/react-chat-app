@@ -92,7 +92,7 @@ function setSearchDefault(){
   setUsername("")
 }
 useEffect(()=>{
-  console.log(props.searchDef)
+  
     setSearchDefault()
     props.setsearchDef(false)
     
@@ -103,7 +103,7 @@ useEffect(()=>{
   return (
     <div className={styles.search}>
       <div className={styles.searchForm} >
-        <input type="text" className={styles.searchInp} placeholder='Find a user & select eg:suresh,ramesh,amit.. ' 
+        <input type="text" className={styles.searchInp} placeholder='Search a user eg:suresh,ramesh,amit.. ' 
           onChange={(e) => {setUsername(e.target.value); handleSearch(); console.log(e.target.value)}}
           value={username}/>
       </div>

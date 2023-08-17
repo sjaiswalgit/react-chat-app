@@ -1,5 +1,28 @@
 .sidebar{
     flex:1;
-    background-color:#3e3c61 ;
+    background-color:rgba(0,0,0,0.5) ;
     
 }
+.slidebar{
+    position: absolute;
+    z-index: 2;
+    top:0;
+    overflow: hidden;
+    left:0;
+    background-color:rgb(209, 90, 126) ;
+    width:100%;
+    height: 100%;
+    transition: all 0.3s linear;
+}
+.minimize{
+    position: absolute;
+    z-index: 2;
+    top:0;
+    overflow: hidden;
+    left:0;
+    background-color:rgb(194, 78, 113) ;
+    width:0;
+    height: 100%;
+    transition: all 0.3s linear;
+}
+
