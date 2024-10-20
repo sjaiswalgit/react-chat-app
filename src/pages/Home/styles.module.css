@@ -1,16 +1,18 @@
-.homepage{
-    background-color: #022b2c;
+.homepage {
+    background: linear-gradient(135deg, #43cea2, #185a9d);
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
     width: 100%;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
-.container{
-    border:1px solid white;
-    border-radius: 10px;
+.container {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
     width: 65%;
     height: 80%;
     display: flex;
@@ -18,11 +20,34 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
-.box{display: flex;
+
+.box {
+    display: flex;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .container, .box {
+        width: 90%;
+        height: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container, .box {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
 }

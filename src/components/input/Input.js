@@ -4,6 +4,7 @@ import send from '../../Images/send.png'
 import add from '../../Images/addImage.png'
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
+import { SendOutlined,FileAddFilled } from "@ant-design/icons";
 import {
   arrayUnion,
   doc,
@@ -82,7 +83,6 @@ useEffect(()=>{
    
     setImg(null);
   };
-  console.log(img)
   return (
     <div className={styles.input}>
         <input type='text' placeholder='Type something...' className={styles.typemssg} onChange={(e) => setText(e.target.value)
@@ -91,9 +91,9 @@ useEffect(()=>{
         <div className={styles.sent}>
             <input type='file' accept="image/*" style={{display:'none'}} id='file' onChange={(e) => setImg(e.target.files[0])}/>
             <label htmlFor='file'>
-                <img src={add} alt="" className={styles.sentImg}/>
+            <FileAddFilled style={{fontSize:'1.5rem'}} />
             </label>
-            <button className={styles.sendbtn} onClick={handleSend}><img style={{width:'30px',objectFit:"cover"}} src={send} alt="" /></button>
+            <button className={styles.sendbtn} onClick={handleSend}> <SendOutlined style={{fontSize:'2rem',backgroundColor:'white'}}/></button>
           <figure className={(img?styles.sendpic:styles.nopic)}>
           <img src={imageURL} height="100px" alt=""/>
           <figcaption style={{textAlign:"center"}}>Preview</figcaption>

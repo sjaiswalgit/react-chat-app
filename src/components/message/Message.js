@@ -38,8 +38,8 @@ const Message = ({ message }) => {
         <div className={styles.messageInfo}>
             <img src={
             message.senderId === currentUser.uid
-              ? currentUser.photoURL
-              : data.user.photoURL
+              ? (currentUser?.photoURL || '/react-chat-app/blankdp.jpg')
+              :( data.user?.photoURL || '/react-chat-app/blankdp.jpg')
           } alt="" className={styles.senderImg}/>
             <span>{mssgTime}</span>
         </div>

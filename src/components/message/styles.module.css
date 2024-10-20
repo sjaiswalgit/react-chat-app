@@ -7,7 +7,7 @@
 .messageInfo{
     display: flex;
     flex-direction: column;
-    color:white;
+    color:rgb(83, 83, 83);
     font-weight: 300;
     font-size: small;
 }
@@ -36,7 +36,7 @@
     align-items: flex-start;
 }
 .mssgpara{
-    background-color: white;
+    background-color: rgb(134, 134, 134);
     color:black;
     padding: 10px 20px;
     border-radius: 0 10px 10px 10px;

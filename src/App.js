@@ -3,32 +3,17 @@ import Login from "./pages/Login/login";
 import Register from "./pages/Register/register";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import { useAppContext} from "./context/AuthContext";
 
 function App() {
-  const { currentUser } = useContext(AuthContext);
+const {currentUser}=useAppContext()
 
-  const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
-      return <Navigate to="/login" />;
-    }
-
-    return children
-  };
 
   return (
-    <BrowserRouter basename="/React-Chat-App">
+    <BrowserRouter basename="/react-chat-app">
       <Routes>
         <Route path="/">
-          <Route
-            index
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+          <Route index element={currentUser?<Home/>:<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>

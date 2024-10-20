@@ -2,7 +2,7 @@ import React, { useState ,useContext} from 'react'
 import styles from './styles.module.css'
 import NavBar from '../navbar/NavBar'
 import SearchBar from '../search/SearchBar'
-import Chats from '../chats.js/Chats'
+import Chats from '../chats/Chats'
 import { ToggleContext } from '../../context/ToggleContext'
 const Sidebar = (props) => {
   const [searchDef,setsearchDef]=useState(false)

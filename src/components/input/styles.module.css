@@ -1,53 +1,59 @@
-.input{
+.input {
     height: 50px;
-    background-color: white;
-    padding: 10px;
+    background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
 }
-.typemssg{
+
+.typemssg {
     width: 100%;
     border: none;
     outline: none;
-    color: #2f2d52;
+    color: #333333;
     font-size: 18px;
-    }
+}
 
-    .typemssg::placeholder{
-        color: rgb(146, 146, 146);}
-.sent{
+
+
+.sent {
     display: flex;
     align-items: center;
     gap: 10px;
     justify-content: center;
     z-index: 0;
 }
-.sentImg{
+
+.sentImg {
     height: 30px;
     cursor: pointer;
     object-fit: cover;
 }
-.sentImg:hover{
-    scale:1.1;
+
+.sentImg:hover {
+    scale: 1.1;
 }
-.sendbtn{
+
+.sendbtn {
     border: none;
-  padding: 0;
-  cursor: pointer;
-  background-color: white;
+    padding: 0;
+    cursor: pointer;
+    background-color:rgb(234, 232, 232);
 }
-.sendbtn:hover{
-    scale:1.1;
-  }
-.sendpic{
-position: absolute;
-z-index:2;
-height: 100px;
-top:-100px;
-left:0px
+
+.sendbtn:hover {
+    scale: 1.1;
 }
-.nopic{
+
+.sendpic {
+    position: absolute;
+    z-index: 2;
+    height: 100px;
+    top: -100px;
+    left: 0px
+}
+
+.nopic {
     display: none;
 }
