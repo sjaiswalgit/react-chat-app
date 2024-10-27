@@ -12,8 +12,10 @@ import {
   serverTimestamp,
   getDoc,
 } from "firebase/firestore";
+import {Input} from 'antd';
 import { db } from "../../Firebase/firebase";
 import { AuthContext } from "../../context/AuthContext";
+const {Search}= Input
 
 const SearchBar = (props) => {
   const [username, setUsername] = useState("");
@@ -120,7 +122,7 @@ useEffect(()=>{
   return (
     <div className={styles.search}>
       <div className={styles.searchForm} >
-        <input type="text" className={styles.searchInp} placeholder='Search a user eg:suresh,ramesh,amit.. ' 
+        <Search className={styles.searchInp} placeholder='Search a user eg:suresh,ramesh,amit.. ' 
           onChange={(e) => {setUsername(e.target.value); handleSearch(e.target.value);}}
           value={username}/>
       </div>
