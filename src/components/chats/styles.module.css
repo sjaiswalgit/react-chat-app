@@ -1,13 +1,14 @@
 .chats{
-    padding: 10px;
+   
 }
 .userChat{
     display: flex;
     align-items: center;
-    padding: 10px 0 10px 0;
+    padding: 10px 0 10px 10px;
     gap:10px;
     color: rgb(60, 60, 60);
     cursor: pointer;
+    height: 4rem;
     border-bottom:1px solid rgb(178, 178, 178) ;
 }
 .userChat:hover{
@@ -16,12 +17,13 @@
 .activeUserChat{
     display: flex;
     align-items: center;
-    padding: 10px 0 10px 0;
+    padding: 10px 0 10px 10px;
     gap:10px;
     color: rgb(60, 60, 60);
     cursor: pointer;
+    height: 4rem;
     border-bottom:1px solid rgb(178, 178, 178) ;
-    background-color: rgb(205, 205, 205);
+    background-color: rgb(218, 218, 218);
 }
 .userImage{
     width: 50px;
@@ -43,4 +45,8 @@
     font-size: 0.8rem;
     color: rgb(60, 60, 60);
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 5rem;
 }
